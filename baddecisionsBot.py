@@ -19,6 +19,7 @@ async def on_message(message):
     if message.content == 'raa' and authorid == 568078265458229248:
         print ('we got one')
         await message.channel.send("gott'em gud")
+    await client.process_commands(message)
 
 #load cogs
 extensions = ['fun', 'utilities', 'moderation']
