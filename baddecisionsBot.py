@@ -11,16 +11,6 @@ async def on_ready():
     game = discord.Game("in the mud")
     await client.change_presence(status=discord.Status.online, activity=game)
 
-#gott'em gud
-@client.event
-async def on_message(message):
-    author = message.author
-    authorid = message.author.id
-    if message.content == 'raa' and authorid == 568078265458229248:
-        print ('we got one')
-        await message.channel.send("gott'em gud")
-    await client.process_commands(message)
-
 #load cogs
 extensions = ['fun', 'utilities', 'moderation']
 if __name__ == '__main__':
