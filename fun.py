@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import random
-class Fun(commands.Cog):
+class fun(commands.Cog):
     def __init__(self, client):
         self.client = client
         self._last_member = None
@@ -13,19 +13,18 @@ class Fun(commands.Cog):
         if message.content == 'raa' and authorid == 568078265458229248:
             print ('we got one')
             await message.channel.send("gott'em gud")
-        await self.client.process_commands(message)
 
-    @commands.command()
+    @commands.command(description='Says something')
     async def say(self, ctx, *, message):
         await ctx.message.delete()
         await ctx.send(message)
 
-    @commands.command()
+    @commands.command(description='Greets you')
     async def hello(self, ctx):
         await ctx.message.delete()
         await ctx.send('hello')
 
-    @commands.command()
+    @commands.command(description='Predicts the future')
     async def future(self, ctx,):
         if ctx.author.id == 241161696561987585:
             await ctx.send("f**k off madoc you're future isn't getting any brighter from doing this")
@@ -39,12 +38,17 @@ class Fun(commands.Cog):
                 await ctx.send("YOU THINK YOU HAVE A FUTURE XD !?!!?!")
 
 
-    @commands.command()
+    @commands.command(description='Boops member')
     async def boop(self, ctx, member: discord.Member):
         await ctx.message.delete()
-        await ctx.send("boop {} from {} xx".format(member.mention, ctx.author.mention))
+        embed = discord.Embed(
+            colour = discord.Colour(0xb55ef1)
+        )
+        embed.set_author(name='Boop!')
+        embed.add_field(name='{}'.format(member), value='from {} xx'.format(ctx.author))
+        await ctx.send(embed=embed)
 
     
 def setup(client):
-    client.add_cog(Fun(client))
+    client.add_cog(fun(client))
     
