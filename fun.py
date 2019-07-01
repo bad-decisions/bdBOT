@@ -42,7 +42,7 @@ class fun(commands.Cog):
     async def boop(self, ctx, member: discord.Member):
         await ctx.message.delete()
         embed = discord.Embed(
-            colour = discord.Colour(0xb55ef1)
+            colour = ctx.author.colour
         )
         embed.set_author(name='Boop!')
         embed.add_field(name='{}'.format(member), value='from {} xx'.format(ctx.author))

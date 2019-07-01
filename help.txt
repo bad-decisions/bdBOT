@@ -1,0 +1,49 @@
+    @commands.group()
+    async def help(self, ctx, *, request=None):
+        if request == None:
+            embed = discord.Embed(
+                colour = discord.Colour(0xffca00)
+            )
+            embed.set_author(name='Help')
+            embed.add_field(name='Available Categories', value='**Fun** >> 4 available \n**Moderation** >> 5 available \n**Utilities** >> 1 available')
+            await ctx.send(embed=embed)
+        elif request == 'moderation':
+            embed = discord.Embed(
+                colour = discord.Colour(0xffca00)
+            )
+            embed.set_author(name='Help')
+            embed.add_field(name='Available Commands', value='**Clear** >> Removes previous messages \n**Kick** >> Kicks somebody from the server \n**Ban** >> Bans somebody from the server \n**Mute** >> Mutes somebody \n**Unmute** >> Unmutes somebody')
+            await ctx.send(embed=embed)
+        elif request == 'fun':
+            embed = discord.Embed(
+                colour = discord.Colour(0xffca00)
+            )
+            embed.set_author(name='Help')
+            embed.add_field(name='Available Commands', value='**Say** >> Says anythig you specify \n**Hello** >> Greets you \n**Future** >> Preditcs your future \n**Boop** >> Boops a specified person')
+            await ctx.send(embed=embed)
+        elif request == 'utils' or request == 'utilities':
+            embed = discord.Embed(
+                colour = discord.Colour(0xffca00)
+            )
+            embed.set_author(name='Help')
+            embed.add_field(name='Available Commands', value='**Ping** >> Displays client latency')
+            await ctx.send(embed=embed)
+        elif request == 'boop':
+            embed = discord.Embed(
+                colour = discord.Colour(0xffca00)
+            )
+            embed.set_author(name='Help')
+            embed.add_field(name=request, value='B
+
+//
+
+        for cog in self.client.cogs:
+            if request == cog:
+                for Command in cog:
+                    embed.add_field(name=Command, value=Command(Command.description))
+            elif request == None:
+                n = 0
+                for char in cog:
+                    n = n + 1
+                embed.add_field(name=cog, value='{} commands available'.format(n))
+        await ctx.send(embed=embed)

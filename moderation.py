@@ -49,7 +49,12 @@ class moderation(commands.Cog):
         m = discord.utils.get(ctx.message.guild.roles, name= 'Mute')
         await member.remove_roles(m)
         await ctx.send("{} has been unmuted".format(member.mention))
-            
+
+    @commands.Cog.listener()
+    async def on_message_delete(message):
+        channel = client.get_channel(594928011145641984)
+        await channel.send("**{}** in **{}** >> {}".format(message.author.name, message.chennel.name, message.clean_content))
+                
 
     
 
