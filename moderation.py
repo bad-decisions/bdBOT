@@ -53,7 +53,7 @@ class moderation(commands.Cog):
     @commands.Cog.listener()
     async def on_message_delete(message):
         channel = client.get_channel(594928011145641984)
-        await channel.send("**{}** in **{}** >> {}".format(message.author.name, message.chennel.name, message.clean_content))
+        await channel.send("**{}** in **{}** >> {}".format(message.author.name, message.channel.name, message.clean_content))
                 
 
     
