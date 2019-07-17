@@ -51,8 +51,8 @@ class moderation(commands.Cog):
         await ctx.send("{} has been unmuted".format(member.mention))
 
     @commands.Cog.listener()
-    async def on_message_delete(message):
-        channel = client.get_channel(594928011145641984)
+    async def on_message_delete(self, message):
+        channel = self.client.get_channel(594928011145641984)
         await channel.send("**{}** in **{}** >> {}".format(message.author.name, message.channel.name, message.clean_content))
                 
 
