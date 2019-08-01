@@ -16,7 +16,7 @@ class help(commands.Cog):
             cog_desc = ''
             for c in self.client.cogs:
                 if c != "help":
-                    cog_desc = cog_desc + f"\n **{c}**    {len(self.client.cogs[c].get_commands())} Commands Available "
+                    cog_desc = cog_desc + "\n **{}**    {} Commands Available ".format(c, len(self.client.cogs[c].get_commands()))
             embed.add_field(name='Available Categories', value = cog_desc, inline = False)
         else:
             found = False
@@ -25,7 +25,7 @@ class help(commands.Cog):
                     command_list = ''
                     for command in self.client.cogs[cog].get_commands():
                         if not command.hidden:
-                            command_list = command_list + f'**{command.name}**    {command.description} \n'
+                            command_list = command_list + '**{}**    {} \n'.format(command.name, command.description)
                             found = True
                     embed.add_field(name='Commands Available', value=command_list)
             if not found:
