@@ -83,23 +83,36 @@ class moderation(commands.Cog):
    
     @commands.Cog.listener()
     async def on_message_delete(self, message):
-        file_s = open("serverid.txt", 'r')
-        files = file_s.read()
-        serverlist = []
-        serverlist = files.split(' ')
-        file_c = open("channelid.txt", 'r')
-        filec = file_c.read()
-        channellist = []
-        channellist = filec.split(' ')
-        server = message.guild.id
+        filed = []
+        file = (open("nodel.txt", 'r')).read()
+        filed = file.split(',')
         i = 0
-        for i in range(len(serverlist)):
-            if str(server) == str(serverlist[i]):
-                channel = self.client.get_channel(int(channellist[i]))
-                await channel.send("**{}** in **{}** >> {}".format(message.author.name, message.channel.name, message.clean_content))
+        n = 0
+        cid = message.channel.id
+        for i in range(len(filed) - 1):
+            if int(cid) - int(filed[i]) == 0:
+                n += 1
+                i += 1
             else:
                 i += 1
-
+        if n == 0:
+            file_s = open("serverid.txt", 'r')
+            files = file_s.read()
+            serverlist = []
+            serverlist = files.split(' ')
+            file_c = open("channelid.txt", 'r')
+            filec = file_c.read()
+            channellist = []
+            channellist = filec.split(' ')
+            server = message.guild.id
+            i = 0
+            for i in range(len(serverlist)):
+                if str(server) == str(serverlist[i]):
+                    channel = self.client.get_channel(int(channellist[i]))
+                    await channel.send("**{}** in **{}** >> {}".format(message.author.name, message.channel.name, message.clean_content))
+                else:
+                    i += 1
+            
     @commands.command(description="Sets annoucement channel")
     @has_permissions(administrator=True)
     async def set_announcement(self, ctx):
@@ -117,7 +130,7 @@ class moderation(commands.Cog):
             file = []
             file = ((open("announcements.txt", 'r')).read()).split(' ')
             i = 0
-            for i in range(len(file)):
+            for i in range(len(file) - 1):
                 channel = self.client.get_channel(int(file[i]))
                 embed = discord.Embed(
                     colour = discord.Color(0xffca00)
@@ -152,6 +165,42 @@ class moderation(commands.Cog):
             channel = self.client.get_channel(int(file[1]))
             await channel.send(embed=embed)
             await ctx.send("Annoucement made")
+
+    @commands.command(description="Sets a channel to be exclded from delete logs")
+    @has_permissions(administrator=True)
+    async def no_delete(self, ctx):
+        file = open("nodel.txt", 'a')
+        cid = ctx.channel.id
+        file.write("{},".format(cid))
+        await ctx.send("Channel {} excluded from delete logs".format(cid))
+
+    @commands.command(description="Turns delete logs on for the channel")
+    @has_permissions(administrator=True)
+    async def yes_delete(self, ctx):
+        filer = []
+        filer = ((open("nodel.txt", 'r')).read()).split(',')
+        cid = ctx.channel.id
+        i = 0
+        aha = ''
+        for i in range(len(filer)-1):
+            if int(cid) - int(filer[i]) == 0:
+                del filer[i]
+                break
+            else:
+                i += 1
+        i = 0
+        for i in range(len(filer)):
+            if filer[i] != '':
+                aha = aha + filer[i] + ','
+                i += 1
+            elif filer[i] == '':
+                aha = aha + filer[i]
+                i += 1
+        file = open("nodel.txt", 'w')
+        file.write(aha)
+        await ctx.send("Channel {} is included in delete logs".format(cid))
+            
+        
             
 def setup(client):
     client.add_cog(moderation(client))

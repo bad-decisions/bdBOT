@@ -12,7 +12,7 @@ class fun(commands.Cog):
         authorid = message.author.id
         if message.content == 'raa' and authorid == 568078265458229248:
             print ('we got one')
-            await message.channel.send("gott'em gud")
+            await message.channel.send("ha lol")
 
     @commands.command(description='Says something')
     async def say(self, ctx, *, message):
@@ -37,7 +37,6 @@ class fun(commands.Cog):
             elif number == 3:
                 await ctx.send("YOU THINK YOU HAVE A FUTURE XD !?!!?!")
 
-
     @commands.command(description='Boops member')
     async def boop(self, ctx, member: discord.Member):
         await ctx.message.delete()
@@ -48,7 +47,10 @@ class fun(commands.Cog):
         embed.add_field(name='{}'.format(member), value='from {} xx'.format(ctx.author))
         await ctx.send(embed=embed)
 
-    
+    @commands.command(description='Sends the link for a text base game. Requires python installed')
+    async def game(self, ctx):
+        await ctx.send("https://drive.google.com/open?id=17h9V8KTelgclvhxWP6suX8iTKarI0Q2p")
+        
 def setup(client):
     client.add_cog(fun(client))
     

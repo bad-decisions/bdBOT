@@ -51,16 +51,16 @@ class utilities(commands.Cog):
         await ctx.send("Timer finished")
 
     @commands.command(description='Logs a formal complaint to be processed')
-    async def complain(self, ctx, *, complaint):
+    async def complain(self, ctx, title, *, complaint):
         await ctx.message.delete()
         await ctx.send("Logging complaint")
         await asyncio.sleep(5)
         await ctx.channel.purge(limit=1)
         embed = discord.Embed(
-            colour = ctx.author.colour
+            colour = discord.Color(0xffca00)
         )
-        embed.set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
-        embed.add_field(name='A complaint has been made:', value = complaint)
+        embed.set_author(name="A complaint was made...")
+        embed.add_field(name=title, value = complaint)
         await ctx.send(embed=embed)
 
     
